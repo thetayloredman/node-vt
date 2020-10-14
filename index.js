@@ -87,16 +87,13 @@ class URLParams {
             this.string = '';
         } else {
             for (let i of d) {
-                this._appendString(
-                    this._urlEncode(i[0]),
-                    this._urlEncode(i[1])
-                );
+                this._appendString(i[0], i[1]);
             }
         }
     }
     _appendString(key, val) {
         if (this.string) {
-            this.string += `&${key}=${val}`
+            this.string += `&${this._urlEncode(key)}=${this._urlEncode(val)}`
         } else {
             this.string = `${key}=${val}`
         }
