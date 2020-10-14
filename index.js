@@ -26,7 +26,7 @@ const apiSettings = {
     apiRoot: '/api/v3'
 }
 
-// Protection stuff
+// Validation
 const validMethods = [
     'GET',
     'POST',
