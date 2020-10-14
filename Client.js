@@ -19,17 +19,29 @@
 // Modules
 
 // Imports
-const { APIRequest } = require('./index.js')
+const { APIRequest, Err } = require('./index.js')
 
 // Main
 class Client {
+    /**
+     * Creates a new API client.
+     * @constructor
+     * @param {String} key Your VT API key
+     * @example
+     * let client = new nvt.Client('api-key');
+     */
     constructor(key) {
-        this._checkKey(key);
+        this.key = key;
+        this._checkKey();
     }
-    _checkKey(key) {
-        this.validation = new APIRequest('GET', `/users/${key}`, key);
+    _checkKey() {
+        this.validation = new APIRequest('GET', `/users/${this.key}`, this.key);
         this.validation.send().then((d) => {
-            
+            if (d.code === 401) {
+                if (d.data.error.code === 'WrongCredentialsError') {
+                    throw new Err('Invalid API key!', 'BadKeyError');
+                }
+            }
         });
     }
 }
