@@ -45,11 +45,17 @@ class URLParams {
         let d = this.data;
         d = Object.entries(d);
         for (let i of d) {
-            if (this.string) {
-                this.string += `&${i[0]}=${i[1]}`;
-            } else {
-                this.string = `${i[0]}=${i[1]}`;
-            }
+            this._appendString(this._urlEncode(i[0]), this._urlEncode(i[1]));
         }
+    }
+    _appendString(key, val) {
+        if (this.string) {
+            this.string += `&${key}=${val}`
+        } else {
+            this.string = `${key}=${val}`
+        }
+    }
+    _urlEncode(data) {
+        return data;
     }
 }
