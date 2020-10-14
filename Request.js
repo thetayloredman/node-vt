@@ -60,7 +60,7 @@ class Request {
             'GET',
             'POST'
         ];
-        return (validMethod.includes(method) ? true : false);
+        return (validMethods.includes(method) ? true : false);
     }
 
     /**

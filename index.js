@@ -27,15 +27,14 @@ module.exports.apiSettings = apiSettings;
 
 // Import / Export
 const Err = require('./Err.js');
-const URLParams = require('./URLParams.js');
-const Response = require('./Response.js');
-const Request = require('./Request.js');
-const APIRequest = require('./APIRequest.js');
-const Client = require('./Client.js');
-
 module.exports.Err = Err;
+const URLParams = require('./URLParams.js');
 module.exports.URLParams = URLParams;
+const Response = require('./Response.js');
 module.exports.Response = Response;
+const Request = require('./Request.js');
 module.exports.Request = Request;
+const APIRequest = require('./APIRequest.js');
 module.exports.APIRequest = APIRequest;
+const Client = require('./Client.js');
 module.exports.Client = Client;
