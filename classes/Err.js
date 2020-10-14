@@ -19,6 +19,7 @@
 // Modules
 
 // Imports
+const {  } = require('../index.js');
 
 // Main
 class Err extends Error {
