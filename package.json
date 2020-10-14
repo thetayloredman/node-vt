@@ -1,0 +1,19 @@
+{
+  "name": "vt",
+  "version": "0.0.1",
+  "description": "A VirusTotal API Client built for Node.JS!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vt",
+    "virus",
+    "api",
+    "virustotal",
+    "malware",
+    "api-client"
+  ],
+  "author": "BadBoyHaloCat",
+  "license": "GPL-3.0"
+}
