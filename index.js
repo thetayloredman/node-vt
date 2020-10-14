@@ -17,7 +17,6 @@
  */
 
 // Modules
-const { throws } = require('assert');
 const { request } = require('https');
 
 // Pre-defined vars
