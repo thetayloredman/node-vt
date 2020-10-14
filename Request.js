@@ -20,7 +20,7 @@
 const { request } = require('https');
 
 // Imports
-const { Err } = require('../index.js')
+const { Err } = require('./index.js')
 
 // Main
 class Request {

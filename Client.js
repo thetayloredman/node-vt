@@ -19,24 +19,20 @@
 // Modules
 
 // Imports
-const {  } = require('../index.js');
+const { APIRequest } = require('./index.js')
 
 // Main
-class Err extends Error {
-    /**
-     * Creates a new custom error (With message)
-     * @constructor
-     * @param {String} message The error message
-     * @param {String} [type] The type of error (Like "TypeError")
-     * @returns {undefined} undefined
-     * @example
-     * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
-     */
-    constructor(message, type) {
-        super(`${type ? type + ': ' : ''}${message}`);
-        this.name = '[NodeVTError]'
+class Client {
+    constructor(key) {
+        this._checkKey(key);
+    }
+    _checkKey(key) {
+        this.validation = new APIRequest('GET', `/users/${key}`, key);
+        this.validation.send().then((d) => {
+            
+        });
     }
 }
 
 // Export
-module.exports = Err;
+module.exports = Client;

@@ -19,7 +19,7 @@
 // Modules
 
 // Imports
-const { apiSettings, Request } = require('../index.js');
+const { apiSettings, Request } = require('./index.js');
 
 // Main
 class APIRequest extends Request {
