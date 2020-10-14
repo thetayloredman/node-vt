@@ -29,7 +29,7 @@ class Client {
     _checkKey(key) {
         this.validation = new APIRequest('GET', `/users/${key}`, key);
         this.validation.send().then((d) => {
-            console.log(this);
+            
         });
     }
 }
