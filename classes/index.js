@@ -17,4 +17,5 @@
  */
 
 // Export
-export * from './classes/index.js';
+export * from './Err.js';
+export * from './URLParams.js';

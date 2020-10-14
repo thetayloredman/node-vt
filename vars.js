@@ -16,5 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Export
-export * from './classes/index.js';
+// Modules
+
+// Pre-defined vars
+export const apiSettings = {
+    host: 'www.virustotal.com',
+    apiRoot: '/api/v3'
+};
+
+// Validation
+export const validMethods = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH'
+];
