@@ -20,57 +20,135 @@
 const { request } = require('https');
 
 // Imports
-const {  } = require('../index.js')
+const { Err } = require('../index.js')
 
 // Main
 class Request {
-    constructor(method, host, path) {
-        this.method = method;
+    /**
+     * Creates a new Request
+     * @constructor
+     * @param {String} method The request method to use
+     * @param {String} host The host to get from
+     * @param {String} [path="/"] The path to get. Must start with /!
+     * @example
+     * let req = new Request('GET', 'example.com', '/'); // => Request
+     */
+    constructor(method, host, path = '/') {
+        this.method = method.toUpperCase();
         this.host = host;
         this.path = path;
-        this.data = null;
-        this.response = null;
+        this.url = host + path;
         this.headers = {};
+        this.res = null;
+        if (!this._validateMethod(method)) {
+            throw new Err(`Unknown method "${method}".`, 'BadMethodError');
+        };
+        if (!path.startsWith('/')) {
+            throw new Err(`Path "${path}" does not start with "/"!`, 'BadPathError');
+        }
     }
-    setHeader(k, v) {
-        eval(`this.headers = {
-            ...this.headers,
-            "${k}": "${v}"
-        }`);
+
+    /**
+     * Checks if the method is valid
+     * @function
+     * @param {String} method The method to test
+     * @returns {Boolean} `true` for valid, `false` if invalid
+     * @private
+     */
+    _validateMethod(method) {
+        const validMethods = [
+            'GET',
+            'POST'
+        ];
+        return (validMethod.includes(method) ? true : false);
     }
+
+    /**
+     * Ensures the data is a valid type and coerces it to String.
+     * @function
+     * @param {*} data The data to check
+     * @returns {String} The parsed data
+     * @private
+     */
+    _cleanData(data) {
+        const t = typeof data;
+        let o = data;
+        if (t === 'string') {
+            o = o;
+        } else if (t === 'object') {
+            o = JSON.stringify(o);
+        } else if (t === 'undefined') {
+            o = 'undefined';
+        } else if (t === 'boolean') {
+            o = o.toString();
+        } else if (t === 'bigint') {
+            o = o.toString();
+        } else if (t === 'number') {
+            o = o.toString();
+        } else if (t === 'symbol') {
+            o = o.toString();
+        } else {
+            throw new Err('Request cannot accept Functions or any other uncommon data type.', 'TypeError')
+        }
+
+        return o;
+    }
+
+    /**
+     * Sends the request
+     * @function
+     * @param {*} [data] If method is "POST", the data to send. Will automatically be coerced into a string
+     * @returns {Promise<Response>}
+     */
     async send(data) {
         return new Promise((resolve, reject) => {
-            if (this.method.toUpperCase() === 'POST') {
+            if (this.method === 'POST') {
                 let req = request({ host: this.host, path: this.path, method: 'POST' }, (res) => {
                     let data = '';
-                    res.on('data', c => data += c);
+                    res.on('data', (c) => { data += c; });
                     res.on('end', () => {
-                        this.response = new Response(data);
-                    });
-                });
-                for (let h of Object.keys(this.headers)) {
-                    req.setHeader(h[0], h[1]);
-                }
-                req.setHeader('X-Powered-By', 'Node-VT');
-                req.end(data);
-            } else if (this.method.toUpperCase() === 'GET') {
-                let req = request({ host: this.host, path: this.path, method: 'GET' }, (res) => {
-                    let data = '';
-                    res.on('data', c => data += c);
-                    res.on('end', () => {
-                        this.response = new Response(data, res.responseCode);
-                        resolve(this.response)
+                        let response = new Response(data, res);
+                        this.res = response;
+                        resolve(response);
                     });
                 });
                 for (let h of Object.entries(this.headers)) {
                     req.setHeader(h[0], h[1]);
                 }
-                req.setHeader('X-Powered-By', 'Node-VT');
+                req.end(this._cleanData(data));
+            } else if (this.method === 'GET') {
+                let req = request({ host: this.host, path: this.path, method: 'GET' }, (res) => {
+                    let data = '';
+                    res.on('data', (c) => { data += c; });
+                    res.on('end', () => {
+                        let response = new Response(data, res);
+                        this.res = response;
+                        resolve(response);
+                    });
+                });
+                for (let h of Object.entries(this.headers)) {
+                    req.setHeader(h[0], h[1]);
+                }
                 req.end();
-            } else {
-                reject(`Unknown method ${this.method}!`);
             }
-        });
+        })
+    }
+
+    /**
+     * Sets a header for the request. Must be called **before** Request#send!
+     * @function
+     * @param {String} header The header name to set
+     * @param {String} value The value to put under `header`
+     * @returns {undefined} undefined
+     * @example
+     * req.setHeader('X-ApiKey', 'example-api-key');
+     * req.send();
+     */
+    setHeader(header, value) {
+        eval(`this.headers = {
+            ...this.headers,
+            "${header}": "${value}"
+        }`);
     }
 }
 
