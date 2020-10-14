@@ -25,14 +25,6 @@ const apiSettings = {
     apiRoot: '/api/v3'
 }
 
-// Validation
-const validMethods = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH'
-]
-
 // Classes
 class Err extends Error {
     /**
@@ -119,5 +111,92 @@ class URLParams {
         out = encodeURIComponent(out);
 
         return out;
+    }
+}
+
+class Response {
+    constructor(data, responseCode) {
+        this.ok = responseCode < 400;
+        this.text = data;
+        try {
+            this.json = JSON.parse(data);
+        } catch (e) {
+            this.json = null;
+            this.isJson = false;
+        }
+        if (this.json) {
+            this.isJson = true;
+        }
+        this.code = responseCode;
+    }
+}
+
+class Request {
+    constructor(method, host, path) {
+        this.method = method;
+        this.host = host;
+        this.path = path;
+        this.data = null;
+        this.response = null;
+        this.headers = {};
+    }
+    setHeader(k, v) {
+        eval(`this.headers = {
+            ...this.headers,
+            "${k}": "${v}"
+        }`);
+    }
+    async send(data) {
+        return new Promise((resolve, reject) => {
+            if (this.method.toUpperCase() === 'POST') {
+                let req = request({ host: this.host, path: this.path, method: 'POST' }, (res) => {
+                    let data = '';
+                    res.on('data', c => data += c);
+                    res.on('end', () => {
+                        this.response = new Response(data);
+                    });
+                });
+                for (let h of Object.keys(this.headers)) {
+                    req.setHeader(h[0], h[1]);
+                }
+                req.setHeader('X-Powered-By', 'Node-VT');
+                req.end(data);
+            } else if (this.method.toUpperCase() === 'GET') {
+                let req = request({ host: this.host, path: this.path, method: 'GET' }, (res) => {
+                    let data = '';
+                    res.on('data', c => data += c);
+                    res.on('end', () => {
+                        this.response = new Response(data, res.responseCode);
+                        resolve(this.response)
+                    });
+                });
+                for (let h of Object.entries(this.headers)) {
+                    req.setHeader(h[0], h[1]);
+                }
+                req.setHeader('X-Powered-By', 'Node-VT');
+                req.end();
+            } else {
+                reject(`Unknown method ${this.method}!`);
+            }
+        });
+    }
+}
+
+class APIRequest extends Request {
+    constructor(method, path, apiKey) {
+        super(method, apiSettings.host, apiSettings.apiRoot + path);
+        super.setHeader('x-apikey', apiKey)
+    }
+}
+
+class Client {
+    constructor(key) {
+        this._checkKey(key);
+    }
+    _checkKey(key) {
+        this.validation = new APIRequest('GET', `/users/${key}`, key);
+        this.validation.send().then((d) => {
+            console.log(this);
+        });
     }
 }
