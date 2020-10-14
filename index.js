@@ -35,17 +35,58 @@ const validMethods = [
 ]
 
 // Classes
+class Err extends Error {
+    /**
+     * Creates a new custom error (With message)
+     * @constructor
+     * @param {String} message The error message
+     * @param {String} [type] The type of error (Like "TypeError")
+     * @returns {undefined} undefined
+     * @example
+     * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
+     */
+    constructor(message, type) {
+        super(`[NodeVTError] ${type ? type + ': ' : ''}${message}`);
+    }
+}
+
 class URLParams {
     constructor(data) {
         this.data = data;
         this.string = null;
-        this._parse();
+        this._validateType(data);
+        this._init();
     }
-    _parse() {
+    _validateType(data) {
+        let s = this._checkType(data);
+        if (s === null) {
+            // no data
+            throw new Err()
+        } else if (s === false) {
+            // bad type
+
+        } else {
+            // ok, we return
+            return;
+        }
+    }
+    _checkType(data) {
+        if (!data) {
+            return null;
+        } else if (typeof data !== 'object') {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    _init() {
         let d = this.data;
         d = Object.entries(d);
         for (let i of d) {
-            this._appendString(this._urlEncode(i[0]), this._urlEncode(i[1]));
+            this._appendString(
+                this._urlEncode(i[0]),
+                this._urlEncode(i[1])
+            );
         }
     }
     _appendString(key, val) {
@@ -56,6 +97,7 @@ class URLParams {
         }
     }
     _urlEncode(data) {
-        return data;
+        let out = data;
+        return out;
     }
 }
