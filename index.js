@@ -26,6 +26,10 @@ const apiSettings = {
 module.exports.apiSettings = apiSettings;
 
 // Import / Export
+// NOTE:
+//     Remember to do "require" then "export"
+//     IN THAT ORDER! Doing it in a different
+//     order will cause errors!
 const Err = require('./Err.js');
 module.exports.Err = Err;
 const URLParams = require('./URLParams.js');
