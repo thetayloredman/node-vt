@@ -16,23 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Pre-defined vars
-const apiSettings = {
-    host: 'www.virustotal.com',
-    apiRoot: '/api/v3'
+// Modules
+
+// Imports
+const { apiSettings, Request } = require('../index.js');
+
+// Main
+class APIRequest extends Request {
+    constructor(method, path, apiKey) {
+        super(method, apiSettings.host, apiSettings.apiRoot + path);
+        super.setHeader('x-apikey', apiKey);
+    }
 }
 
-// Export those
-module.exports.apiSettings = apiSettings;
-
-// Import / Export
-const { APIRequest, Client, Err, Request, Response, URLParams } = require('./classes/index.js');
-
-module.exports = {
-    APIRequest: APIRequest,
-    Client: Client,
-    Err: Err,
-    Request: Request,
-    Response: Response,
-    URLParams: URLParams
-}
+// Export
+module.exports = APIRequest;
