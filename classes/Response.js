@@ -23,19 +23,40 @@ const {  } = require('../index.js');
 
 // Main
 class Response {
-    constructor(data, responseCode) {
-        this.ok = responseCode < 400;
-        this.text = data;
+    /**
+     * Creates a new Response.
+     * @constructor
+     * @param {String} data The data
+     * @param {*} res The actual response
+     * @example
+     * let response = new Response(data, res); // => Response
+     */
+    constructor(data, res) {
+        this.code = res.statusCode;
+        this.data = {
+            string: data,
+            json: null
+        }
+        this.isJson = null;
+
+        this._parseJSON(data);
+    }
+
+    /**
+     * Attempts to parse the data to JSON.
+     * @function
+     * @param {String} data The data as a string
+     * @returns {undefined} undefined
+     * @private
+     */
+    _parseJSON(data) {
         try {
-            this.json = JSON.parse(data);
+            this.data.json = JSON.parse(data);
+            this.isJson = true;
         } catch (e) {
-            this.json = null;
+            this.data.json = null;
             this.isJson = false;
         }
-        if (this.json) {
-            this.isJson = true;
-        }
-        this.code = responseCode;
     }
 }
 
