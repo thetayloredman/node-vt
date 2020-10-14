@@ -15,3 +15,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+// Modules
+const { throws } = require('assert');
+const { request } = require('https');
+
+// Pre-defined vars
+const apiSettings = {
+    host: 'www.virustotal.com',
+    apiRoot: '/api/v3'
+}
+
+// Protection stuff
+const validMethods = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH'
+]
+
+// Classes
+class URLParams {
+    constructor(data) {
+        this.data = data;
+        this.string = null;
+        this._parse();
+    }
+    _parse() {
+        let d = this.data;
+        d = Object.entries(d);
+        for (let i of d) {
+            if (this.string) {
+                this.string += `&${i[0]}=${i[1]}`;
+            } else {
+                this.string = `${i[0]}=${i[1]}`;
+            }
+        }
+    }
+}
