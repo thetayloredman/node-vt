@@ -46,7 +46,8 @@ class Err extends Error {
      * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
      */
     constructor(message, type) {
-        super(`[NodeVTError] ${type ? type + ': ' : ''}${message}`);
+        super(`${type ? type + ': ' : ''}${message}`);
+        this.name = '[NodeVTError]'
     }
 }
 
@@ -61,10 +62,10 @@ class URLParams {
         let s = this._checkType(data);
         if (s === null) {
             // no data
-            throw new Err()
+            throw new Err('URLParams takes 1 argument: provided 0', 'ArgumentCountError');
         } else if (s === false) {
             // bad type
-
+            throw new Err('URLParams was passed an invalid type: expected Object', 'TypeError');
         } else {
             // ok, we return
             return;
@@ -82,11 +83,15 @@ class URLParams {
     _init() {
         let d = this.data;
         d = Object.entries(d);
-        for (let i of d) {
-            this._appendString(
-                this._urlEncode(i[0]),
-                this._urlEncode(i[1])
-            );
+        if (d.length === 0) {
+            this.string = '';
+        } else {
+            for (let i of d) {
+                this._appendString(
+                    this._urlEncode(i[0]),
+                    this._urlEncode(i[1])
+                );
+            }
         }
     }
     _appendString(key, val) {
@@ -98,6 +103,25 @@ class URLParams {
     }
     _urlEncode(data) {
         let out = data;
+
+        // Parse data types
+        let t = typeof out;
+        switch (t) {
+            case 'string':
+                break;
+            case 'boolean':
+                out = out.toString();
+                break;
+            case 'object':
+                out = JSON.stringify(out);
+                break;
+            default:
+                break;
+        }
+
+        // Parse URLEncoded stuff
+        out = encodeURIComponent(out);
+
         return out;
     }
 }
