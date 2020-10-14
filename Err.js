@@ -19,25 +19,24 @@
 // Modules
 
 // Imports
-const {  } = require('../index.js');
+const {  } = require('./index.js');
 
 // Main
-class Response {
-    constructor(data, responseCode) {
-        this.ok = responseCode < 400;
-        this.text = data;
-        try {
-            this.json = JSON.parse(data);
-        } catch (e) {
-            this.json = null;
-            this.isJson = false;
-        }
-        if (this.json) {
-            this.isJson = true;
-        }
-        this.code = responseCode;
+class Err extends Error {
+    /**
+     * Creates a new custom error (With message)
+     * @constructor
+     * @param {String} message The error message
+     * @param {String} [type] The type of error (Like "TypeError")
+     * @returns {undefined} undefined
+     * @example
+     * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
+     */
+    constructor(message, type) {
+        super(`${type ? type + ': ' : ''}${message}`);
+        this.name = '[NodeVTError]'
     }
 }
 
 // Export
-module.exports = Response;
+module.exports = Err;

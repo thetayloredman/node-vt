@@ -26,13 +26,19 @@ const apiSettings = {
 module.exports.apiSettings = apiSettings;
 
 // Import / Export
-const { APIRequest, Client, Err, Request, Response, URLParams } = require('./classes/index.js');
-
-module.exports = {
-    APIRequest: APIRequest,
-    Client: Client,
-    Err: Err,
-    Request: Request,
-    Response: Response,
-    URLParams: URLParams
-}
+// NOTE:
+//     Remember to do "require" then "export"
+//     IN THAT ORDER! Doing it in a different
+//     order will cause errors!
+const Err = require('./Err.js');
+module.exports.Err = Err;
+const URLParams = require('./URLParams.js');
+module.exports.URLParams = URLParams;
+const Response = require('./Response.js');
+module.exports.Response = Response;
+const Request = require('./Request.js');
+module.exports.Request = Request;
+const APIRequest = require('./APIRequest.js');
+module.exports.APIRequest = APIRequest;
+const Client = require('./Client.js');
+module.exports.Client = Client;

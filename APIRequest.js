@@ -19,20 +19,15 @@
 // Modules
 
 // Imports
-const { APIRequest } = require('../index.js')
+const { apiSettings, Request } = require('./index.js');
 
 // Main
-class Client {
-    constructor(key) {
-        this._checkKey(key);
-    }
-    _checkKey(key) {
-        this.validation = new APIRequest('GET', `/users/${key}`, key);
-        this.validation.send().then((d) => {
-            
-        });
+class APIRequest extends Request {
+    constructor(method, path, apiKey) {
+        super(method, apiSettings.host, apiSettings.apiRoot + path);
+        super.setHeader('x-apikey', apiKey);
     }
 }
 
 // Export
-module.exports = Client;
+module.exports = APIRequest;

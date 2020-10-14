@@ -19,7 +19,7 @@
 // Modules
 
 // Imports
-const {  } = require('../index.js');
+const {  } = require('./index.js');
 
 // Main
 class URLParams {
