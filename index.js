@@ -185,7 +185,7 @@ class Request {
 class APIRequest extends Request {
     constructor(method, path, apiKey) {
         super(method, apiSettings.host, apiSettings.apiRoot + path);
-        super.setHeader('x-apikey', apiKey)
+        super.setHeader('x-apikey', apiKey);
     }
 }
 
