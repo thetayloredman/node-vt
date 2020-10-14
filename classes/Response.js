@@ -16,23 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Pre-defined vars
-const apiSettings = {
-    host: 'www.virustotal.com',
-    apiRoot: '/api/v3'
+// Modules
+
+// Imports
+const {  } = require('../index.js');
+
+// Main
+class Response {
+    constructor(data, responseCode) {
+        this.ok = responseCode < 400;
+        this.text = data;
+        try {
+            this.json = JSON.parse(data);
+        } catch (e) {
+            this.json = null;
+            this.isJson = false;
+        }
+        if (this.json) {
+            this.isJson = true;
+        }
+        this.code = responseCode;
+    }
 }
 
-// Export those
-module.exports.apiSettings = apiSettings;
-
-// Import / Export
-const { APIRequest, Client, Err, Request, Response, URLParams } = require('./classes/index.js');
-
-module.exports = {
-    APIRequest: APIRequest,
-    Client: Client,
-    Err: Err,
-    Request: Request,
-    Response: Response,
-    URLParams: URLParams
-}
+// Export
+module.exports = Response;

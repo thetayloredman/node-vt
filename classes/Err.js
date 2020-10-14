@@ -16,23 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// Pre-defined vars
-const apiSettings = {
-    host: 'www.virustotal.com',
-    apiRoot: '/api/v3'
+// Modules
+
+// Imports
+
+// Main
+class Err extends Error {
+    /**
+     * Creates a new custom error (With message)
+     * @constructor
+     * @param {String} message The error message
+     * @param {String} [type] The type of error (Like "TypeError")
+     * @returns {undefined} undefined
+     * @example
+     * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
+     */
+    constructor(message, type) {
+        super(`${type ? type + ': ' : ''}${message}`);
+        this.name = '[NodeVTError]'
+    }
 }
 
-// Export those
-module.exports.apiSettings = apiSettings;
-
-// Import / Export
-const { APIRequest, Client, Err, Request, Response, URLParams } = require('./classes/index.js');
-
-module.exports = {
-    APIRequest: APIRequest,
-    Client: Client,
-    Err: Err,
-    Request: Request,
-    Response: Response,
-    URLParams: URLParams
-}
+// Export
+module.exports = Err;
