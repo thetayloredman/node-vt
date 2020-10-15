@@ -20,8 +20,6 @@
 /**
  * The API settings.
  * @constant
- * @property {String} host The API host
- * @property {String} apiRoot The API path and version, such as "/api/v3".
  */
 const apiSettings = {
     host: 'www.virustotal.com',
