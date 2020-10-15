@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Client</title>
+    <title>ScanResults</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -47,7 +47,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Client</h1>
+    <h1 class="page-title">ScanResults</h1>
     
 
     
@@ -63,12 +63,12 @@
         
         <h2>
         
-        Client
+        ScanResults
         
         </h2>
         
         
-            <div class="class-description"><p>The main gateway to interacting with the API.</p></div>
+            <div class="class-description"><p>Represents scan results from the API.</p></div>
             <hr/>
         
     
@@ -84,14 +84,14 @@
         <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Client"><span class="type-signature"></span>new Client<span class="signature">(key)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ScanResults"><span class="type-signature"></span>new ScanResults<span class="signature">(data)</span><span class="type-signature"></span></h4>
 
     
 
 
 
     <div class="description">
-        <p>Creates a new API client.</p>
+        <p>Creates scan results</p>
     </div>
 
 
@@ -128,13 +128,13 @@
 
         <tr>
             
-                <td class="name"><code>key</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type"><a href="Response.html">Response</a></span>
 
 
             
@@ -144,7 +144,7 @@
 
             
 
-            <td class="description last"><p>Your VT API key</p></td>
+            <td class="description last"><p>The response from the API when performing GET /files/{id}. Warning: The Response MUST have been resolved!</p></td>
         </tr>
 
     
@@ -183,7 +183,7 @@
 
         <tr>
             
-                <td class="name"><code>user</code></td>
+                <td class="name"><code>results</code></td>
             
 
             <td class="type">
@@ -199,7 +199,30 @@
 
             
 
-            <td class="description last"><p>The user of the API</p>
+            <td class="description last"><p>The raw scan results</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stats</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The last analysis stats</p>
                 <h6>Properties</h6>
 
 <table class="props">
@@ -224,142 +247,7 @@
 
         <tr>
             
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The type of user</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your user ID</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>quotas</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Quota information</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>api_requests_daily</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your daily quota</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>total</code></td>
+                <td class="name"><code>harmless</code></td>
             
 
             <td class="type">
@@ -375,14 +263,14 @@
 
             
 
-            <td class="description last"><p>Your daily quota total</p></td>
+            <td class="description last"><p>The number of engines that say OK.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>used</code></td>
+                <td class="name"><code>malicious</code></td>
             
 
             <td class="type">
@@ -398,14 +286,14 @@
 
             
 
-            <td class="description last"><p>Your daily quota used</p></td>
+            <td class="description last"><p>The number of engines that flag the file.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>remaining</code></td>
+                <td class="name"><code>suspicious</code></td>
             
 
             <td class="type">
@@ -421,62 +309,14 @@
 
             
 
-            <td class="description last"><p>Your daily quota that is left</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>The number of engines that are suspicious about the file.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>api_requests_hourly</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your hourly quota</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>total</code></td>
+                <td class="name"><code>timeout</code></td>
             
 
             <td class="type">
@@ -492,14 +332,14 @@
 
             
 
-            <td class="description last"><p>Your hourly quota total</p></td>
+            <td class="description last"><p>The number of engined that timed out.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>used</code></td>
+                <td class="name"><code>unsupported</code></td>
             
 
             <td class="type">
@@ -515,14 +355,14 @@
 
             
 
-            <td class="description last"><p>Your hourly quota used</p></td>
+            <td class="description last"><p>The number of engines that don't support that type.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>remaining</code></td>
+                <td class="name"><code>undetected</code></td>
             
 
             <td class="type">
@@ -538,131 +378,7 @@
 
             
 
-            <td class="description last"><p>Your hourly quota that is left</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>api_requests_monthly</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your monthly quota</p>
-                <h6>Properties</h6>
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>total</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your monthly quota total</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>used</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your monthly quota used</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>remaining</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Your monthly quota that is left</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>The engines that say this file is OK.</p></td>
         </tr>
 
     
@@ -709,7 +425,7 @@
         <div class="details-item-container">
             <dt class="tag-source">Source:</dt>
             <dd class="tag-source"><ul class="dummy"><li>
-                <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line44">line 44</a>
+                <a href="ScanResults.js.html">ScanResults.js</a>, <a href="ScanResults.js.html#line36">line 36</a>
             </li></ul></dd>
         </div>
     
@@ -738,7 +454,7 @@
     <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
         <strong>Example</strong>
         
-    <pre class="prettyprint"><code>let client = new nvt.Client('api-key');</code></pre>
+    <pre class="prettyprint"><code>const results = new ScanResults(res.data.json); // => ScanResults</code></pre>
 
     </div>
 
