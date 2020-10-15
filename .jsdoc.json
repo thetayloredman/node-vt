@@ -1,6 +1,6 @@
 {
     "source": {
-        "include": ["package.json", "README.md"],
+        "include": ["README.md"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"
     },
@@ -11,8 +11,8 @@
  
     "opts": {
         "encoding": "utf8",
-        "readme": "./README.md",
         "destination": "docs/",
+        "readme": "./README.md",
         "recurse": true,
         "verbose": true,
         "private": true,

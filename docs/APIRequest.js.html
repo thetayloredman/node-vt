@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Client.js</title>
+    <title>APIRequest.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -42,12 +42,12 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html"><div class="text">node-vt</div></a></h2><div class="search-box"><input type="text" placeholder="Search..." id="search-box" /><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-list-div"><ul><li><a href='https://github.com/thetayloredman/node-vt/' class='' id='' target='_blank'>GitHub</a></li><li><a href='https://github.com/thetayloredman/node-vt/blob/LICENCE' class='' id='' target='_blank'>Licence</a></li></ul><h3>Classes</h3><ul><li><a href="APIRequest.html">APIRequest</a><ul class='methods'><li data-type='method'><a href="APIRequest.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="APIRequest.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="APIRequest.html#send">send</a></li><li data-type='method'><a href="APIRequest.html#setHeader">setHeader</a></li></ul></li><li><a href="Client.html">Client</a><ul class='methods'><li data-type='method'><a href="Client.html#_checkKey">_checkKey</a></li><li data-type='method'><a href="Client.html#_fetchQuota">_fetchQuota</a></li></ul></li><li><a href="Err.html">Err</a></li><li><a href="Request.html">Request</a><ul class='methods'><li data-type='method'><a href="Request.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="Request.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="Request.html#send">send</a></li><li data-type='method'><a href="Request.html#setHeader">setHeader</a></li></ul></li><li><a href="Response.html">Response</a><ul class='methods'><li data-type='method'><a href="Response.html#_parseJSON">_parseJSON</a></li></ul></li><li><a href="URLParams.html">URLParams</a><ul class='methods'><li data-type='method'><a href="URLParams.html#_appendString">_appendString</a></li><li data-type='method'><a href="URLParams.html#_checkType">_checkType</a></li><li data-type='method'><a href="URLParams.html#_init">_init</a></li><li data-type='method'><a href="URLParams.html#_urlEncode">_urlEncode</a></li><li data-type='method'><a href="URLParams.html#_validateType">_validateType</a></li></ul></li></ul></div>
+    <h2><a href="index.html"><div class="text">node-vt</div></a></h2><div class="search-box"><input type="text" placeholder="Search..." id="search-box" /><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-list-div"><ul><li><a href='https://github.com/thetayloredman/node-vt/' class='' id='' target='_blank'>GitHub</a></li><li><a href='https://github.com/thetayloredman/node-vt/blob/main/LICENCE' class='' id='' target='_blank'>Licence</a></li></ul><h3>Classes</h3><ul><li><a href="APIRequest.html">APIRequest</a><ul class='methods'><li data-type='method'><a href="APIRequest.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="APIRequest.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="APIRequest.html#send">send</a></li><li data-type='method'><a href="APIRequest.html#setHeader">setHeader</a></li></ul></li><li><a href="Client.html">Client</a><ul class='methods'><li data-type='method'><a href="Client.html#_checkKey">_checkKey</a></li><li data-type='method'><a href="Client.html#_fetchQuota">_fetchQuota</a></li></ul></li><li><a href="Err.html">Err</a></li><li><a href="Request.html">Request</a><ul class='methods'><li data-type='method'><a href="Request.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="Request.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="Request.html#send">send</a></li><li data-type='method'><a href="Request.html#setHeader">setHeader</a></li></ul></li><li><a href="Response.html">Response</a><ul class='methods'><li data-type='method'><a href="Response.html#_parseJSON">_parseJSON</a></li></ul></li><li><a href="URLParams.html">URLParams</a><ul class='methods'><li data-type='method'><a href="URLParams.html#_appendString">_appendString</a></li><li data-type='method'><a href="URLParams.html#_checkType">_checkType</a></li><li data-type='method'><a href="URLParams.html#_init">_init</a></li><li data-type='method'><a href="URLParams.html#_urlEncode">_urlEncode</a></li><li data-type='method'><a href="URLParams.html#_validateType">_validateType</a></li></ul></li></ul></div>
 </nav>
 
 <div id="main">
     
-    <h1 class="page-title">Client.js</h1>
+    <h1 class="page-title">APIRequest.js</h1>
     
 
     
@@ -78,81 +78,26 @@
 // Modules
 
 // Imports
-const { APIRequest, Err } = require('./index.js')
+const { apiSettings, Request } = require('./index.js');
 
 // Main
-class Client {
+class APIRequest extends Request {
     /**
-     * Creates a new API client.
+     * Sends a request to the API directly.
      * @constructor
-     * @param {String} key Your VT API key
-     * @example
-     * let client = new nvt.Client('api-key');
+     * @extends Request
+     * @param {String} method The method to use
+     * @param {String} path The API path
+     * @param {String} apiKey Your API key
      */
-    constructor(key) {
-        this.key = key;
-        this._checkKey();
-        this._fetchQuota();
-    }
-    
-    /**
-     * Checks if the API key is valid.
-     * @function
-     * @private
-     */
-    _checkKey() {
-        let validation = new APIRequest('GET', `/users/${this.key}`, this.key);
-        validation.send().then((d) => {
-            if (d.code === 401) {
-                if (d.data.json.error.code === 'WrongCredentialsError') {
-                    throw new Err('Invalid API key!', 'BadKeyError');
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Fetches the quota.
-     * @function
-     * @private
-     */
-    _fetchQuota() {
-        let quotaChecker = new APIRequest('GET', `/users/${this.key}`, this.key);
-        quotaChecker.send().then((data) => {
-            const d = data.data.json.data;
-            console.log(d)
-            const { attributes: { quotas: q } } = d;
-            this.user = {
-                type: d.type,
-                id: d.id
-            }
-            this.quotas = {
-                api_requests_daily: {
-                    total: q.api_requests_daily.allowed,
-                    used: q.api_requests_daily.used,
-                    remaining: q.api_requests_daily.allowed - q.api_requests_daily.used
-                },
-                api_requests_hourly: {
-                    total: q.api_requests_hourly.allowed,
-                    used: q.api_requests_hourly.used,
-                    remaining: q.api_requests_hourly.allowed - q.api_requests_hourly.used
-                },
-                api_requests_monthly: {
-                    total: q.api_requests_monthly.allowed,
-                    used: q.api_requests_monthly.used,
-                    remaining: q.api_requests_monthly.allowed - q.api_requests_monthly.used
-                }
-            }
-        });
+    constructor(method, path, apiKey) {
+        super(method, apiSettings.host, apiSettings.apiRoot + path);
+        super.setHeader('x-apikey', apiKey);
     }
 }
 
 // Export
-module.exports = Client;</code></pre>
+module.exports = APIRequest;</code></pre>
         </article>
     </section>
 
@@ -164,7 +109,7 @@ module.exports = Client;</code></pre>
 <br class="clear">
 
 <footer>
-  Copyright (C)   2020 Logan Devine<br /><b><a href="https://github.com/thetayloredman/node-vt/blob/LICENCE">Licence</a></b>
+  Copyright (C)   2020 Logan Devine<br /><b><a href="https://github.com/thetayloredman/node-vt/blob/main/LICENCE" target="_blank">Licence</a></b>
 </footer>
 
 <script>prettyPrint();</script>
