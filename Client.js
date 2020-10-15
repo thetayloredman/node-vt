@@ -25,7 +25,6 @@ const { APIRequest, Err } = require('./index.js')
 class Client {
     /**
      * Creates a new API client.
-     * See {@tutorial client} for more information.
      * @constructor
      * @param {String} key Your VT API key
      * @example

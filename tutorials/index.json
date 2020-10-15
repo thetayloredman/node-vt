@@ -1,5 +1,8 @@
 {
-    "client": {
-        "title": "Using Client"
+    "getting-started": {
+        "title": "Getting Started"
+    },
+    "references": {
+        "title": "Useful References"
     }
 }
