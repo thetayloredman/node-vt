@@ -1,5 +1,5 @@
 {
-  "name": "vt",
+  "name": "node-vt",
   "version": "0.0.1",
   "description": "A VirusTotal API Client built for Node.JS!",
   "main": "index.js",
