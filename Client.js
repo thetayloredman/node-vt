@@ -46,7 +46,6 @@ class Client {
         validation.send().then((d) => {
             if (d.code === 401) {
                 if (d.data.json.error.code === 'WrongCredentialsError') {
-                    console.log('DEBUG/ERR', Err);
                     throw new Err('Invalid API key!', 'BadKeyError');
                 } else {
                     return true;
