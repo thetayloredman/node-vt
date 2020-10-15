@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "jsdoc -d docs . && jsdoc -d docs/private -p ."
+    "doc": "jsdoc --configure .jsdoc.json ."
   },
   "keywords": [
     "vt",
@@ -19,5 +19,8 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "jsdoc": "^3.6.6"
+  },
+  "dependencies": {
+    "clean-jsdoc-theme": "^2.2.11"
   }
 }
