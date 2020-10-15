@@ -31,7 +31,7 @@
                     "target": "_blank"
                 }
             ],
-            "footer": "<b>Copyright (C)  2020 Logan Devine</b> <i>See the licence for details.</i>"
+            "footer": "Copyright (C)   2020 Logan Devine<br /><b><a href=\"https://github.com/thetayloredman/node-vt/blob/LICENCE\">Licence</a></b>"
         }
     }
 }
