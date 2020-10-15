@@ -22,11 +22,16 @@
 const {  } = require('./index.js');
 
 // Main
+/**
+ * Represents a set of URLEncoded URL query strings.
+ * @property {Object} data The data
+ * @property {String} string The URLEncoded query string
+ */
 class URLParams {
     /**
      * Creates a new set of URLEncoded parameters.
      * @constructor
-     * @param {*} data The data to use
+     * @param {Object} data The data to use
      */
     constructor(data) {
         this.data = data;

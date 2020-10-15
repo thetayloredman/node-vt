@@ -81,11 +81,14 @@
 const { apiSettings, Request } = require('./index.js');
 
 // Main
+/**
+ * Creates an API Request.
+ * @extends Request
+ */
 class APIRequest extends Request {
     /**
      * Sends a request to the API directly.
      * @constructor
-     * @extends Request
      * @param {String} method The method to use
      * @param {String} path The API path
      * @param {String} apiKey Your API key

@@ -22,6 +22,25 @@
 const { APIRequest, Err } = require('./index.js')
 
 // Main
+/**
+ * The main gateway to interacting with the API.
+ * @property {Object} user The user of the API
+ * @property {String} user.type The type of user
+ * @property {String} user.id Your user ID
+ * @property {Object} quotas Quota information
+ * @property {Object} quotas.api_requests_daily Your daily quota
+ * @property {Number} quotas.api_requests_daily.total Your daily quota total
+ * @property {Number} quotas.api_requests_daily.used Your daily quota used
+ * @property {Number} quotas.api_requests_daily.remaining Your daily quota that is left
+ * @property {Object} quotas.api_requests_hourly Your hourly quota
+ * @property {Number} quotas.api_requests_hourly.total Your hourly quota total
+ * @property {Number} quotas.api_requests_hourly.used Your hourly quota used
+ * @property {Number} quotas.api_requests_hourly.remaining Your hourly quota that is left
+ * @property {Object} quotas.api_requests_monthly Your monthly quota
+ * @property {Number} quotas.api_requests_monthly.total Your monthly quota total
+ * @property {Number} quotas.api_requests_monthly.used Your monthly quota used
+ * @property {Number} quotas.api_requests_monthly.remaining Your monthly quota that is left
+ */
 class Client {
     /**
      * Creates a new API client.

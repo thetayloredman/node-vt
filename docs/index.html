@@ -114,13 +114,62 @@
 <h3>Getting an API key</h3>
 <p>To get an API key, follow these steps:</p>
 <ol>
-<li>Go to <a href="https://www.virustotal.com/">https://www.virustotal.com/</a></li>
-<li>Sign up for an account</li>
-<li>Click on your name in the top right corner:
-<img src="https://media.discordapp.net/attachments/731940839458340915/766376135998570596/Screen_Shot_2020-10-15_at_12.04.51_PM.png" alt="Where to find the button"></li>
-<li>Select <strong><img src="https://raw.github.com/thetayloredman/node-vt/main/icons/key.svg" alt="Key"> API Key</strong>.</li>
+<li>Go to <a href="https://www.virustotal.com/">https://www.virustotal.com/</a>.</li>
+<li>Sign up for an account.</li>
+<li>Click on your name in the top right corner.</li>
+<li>Select <strong>API Key</strong>.</li>
 <li>Copy the API key.</li>
-</ol></article>
+<li>You now have your API key.</li>
+</ol>
+<h3>Making a client</h3>
+<p>In order to interface with the API, we have 2 options.</p>
+<ol>
+<li>Using the <a href="Client.html"><code>Client</code></a> class</li>
+<li>Using <a href="APIRequest.html"><code>APIRequest</code></a></li>
+</ol>
+<h4>Using <code>Client</code></h4>
+<p>First, we create a Client with our API key:</p>
+<pre class="prettyprint source lang-javascript"><code>const key = 'your-api-key-here';
+
+const client = new VT.Client(key);
+</code></pre>
+<p>Now we can use the Client! For more information, see <a href="Client.html"><code>Client</code></a></p>
+<h4>Using <code>APIRequest</code></h4>
+<p>This is a bit advanced, but we can use the <code>APIRequest</code> class to send direct requests to the API.</p>
+<p>Here is a demo:</p>
+<pre class="prettyprint source lang-javascript"><code>const key = 'your-api-key-here';
+
+function request(method, path, data) {
+    /**
+     * APIRequest's constructor takes 3 parameters.
+     * 
+     * 1. The method (GET/POST/etc.)
+     * 2. The path (&quot;/&quot;, &quot;/files&quot;, etc.)
+     * 3. Your API key.
+     */
+    const req = new VT.APIRequest(method, path, key);
+
+    /**
+     * To *send* this request, we use APIRequest#send.
+     */
+    if (method === 'POST') {
+        req.send(data)
+            .then(handle); // Fire the callback
+    } else {
+        req.send()
+            .then(handle); // Fire the callback
+    }
+
+    /**
+     * We need to handle the request when it's done.
+     */
+    const handle = (data) => {
+        // data is a Response with the RAW API response.
+        // We can get the data as JSON and log it.
+        console.log(data.data.json);
+    }
+}
+</code></pre></article>
     </section>
 
 

@@ -22,6 +22,10 @@
 const {  } = require('./index.js');
 
 // Main
+/**
+ * A custom error with message
+ * @extends Error
+ */
 class Err extends Error {
     /**
      * Creates a new custom error (With message)

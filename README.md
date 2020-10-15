@@ -80,3 +80,63 @@ To get an API key, follow these steps:
 4. Select **API Key**.
 5. Copy the API key.
 6. You now have your API key.
+
+### Making a client
+
+In order to interface with the API, we have 2 options.
+
+1. Using the [`Client`](Client.html) class
+2. Using [`APIRequest`](APIRequest.html)
+
+#### Using `Client`
+
+First, we create a Client with our API key:
+
+```javascript
+const key = 'your-api-key-here';
+
+const client = new VT.Client(key);
+```
+
+Now we can use the Client! For more information, see [`Client`](Client.html)
+
+#### Using `APIRequest`
+
+This is a bit advanced, but we can use the `APIRequest` class to send direct requests to the API.
+
+Here is a demo:
+
+```javascript
+const key = 'your-api-key-here';
+
+function request(method, path, data) {
+    /**
+     * APIRequest's constructor takes 3 parameters.
+     * 
+     * 1. The method (GET/POST/etc.)
+     * 2. The path ("/", "/files", etc.)
+     * 3. Your API key.
+     */
+    const req = new VT.APIRequest(method, path, key);
+
+    /**
+     * To *send* this request, we use APIRequest#send.
+     */
+    if (method === 'POST') {
+        req.send(data)
+            .then(handle); // Fire the callback
+    } else {
+        req.send()
+            .then(handle); // Fire the callback
+    }
+
+    /**
+     * We need to handle the request when it's done.
+     */
+    const handle = (data) => {
+        // data is a Response with the RAW API response.
+        // We can get the data as JSON and log it.
+        console.log(data.data.json);
+    }
+}
+```

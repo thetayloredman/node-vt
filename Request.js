@@ -23,6 +23,15 @@ const { request } = require('https');
 const { Err, Response } = require('./index.js')
 
 // Main
+/**
+ * Represents a request to the API.
+ * @property {String} method The method used
+ * @property {String} host The host to send the request to
+ * @property {String} path The path
+ * @property {String} url The full URL
+ * @property {Object} headers The headers
+ * @property {null|Response} res The response (or null if unsent)
+ */
 class Request {
     /**
      * Creates a new Request

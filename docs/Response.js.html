@@ -81,6 +81,14 @@
 const {  } = require('./index.js');
 
 // Main
+/**
+ * Represents a response from the API.
+ * @property {Number} code The response code
+ * @property {Object} data The response data
+ * @property {String} data.string The raw data
+ * @property {null|Object} data.json The data as JSON
+ * @property {null|Boolean} isJson Null for processing, true for valid JSON, false for others
+ */
 class Response {
     /**
      * Creates a new Response.
