@@ -42,3 +42,5 @@ const APIRequest = require('./APIRequest.js');
 module.exports.APIRequest = APIRequest;
 const Client = require('./Client.js');
 module.exports.Client = Client;
+const ScanResults = require('./ScanResults.js');
+module.exports.ScanResults = ScanResults;
