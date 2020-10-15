@@ -2,6 +2,10 @@
 
 Welcome to **node-vt**, a VirusTotal API client made by BadBoyHaloCat!
 
+## Note
+
+If you are reading this from GitHub, some links will be broken. Check out the [docs](https://thetayloredman.github.io/node-vt/)!
+
 ## What is node-vt?
 
 node-vt is a VirusTotal API client. It provides a simple exported API for your use.
