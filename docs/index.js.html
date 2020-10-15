@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Client.js</title>
+    <title>index.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -47,7 +47,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Client.js</h1>
+    <h1 class="page-title">index.js</h1>
     
 
     
@@ -75,126 +75,47 @@
  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/>.
  */
 
-// Modules
-
-// Imports
-const { APIRequest, Err, ScanResults } = require('./index.js')
-
-// Main
+// Pre-defined vars
 /**
- * The main gateway to interacting with the API.
- * @property {Object} user The user of the API
- * @property {String} user.type The type of user
- * @property {String} user.id Your user ID
- * @property {Object} quotas Quota information
- * @property {Object} quotas.api_requests_daily Your daily quota
- * @property {Number} quotas.api_requests_daily.total Your daily quota total
- * @property {Number} quotas.api_requests_daily.used Your daily quota used
- * @property {Number} quotas.api_requests_daily.remaining Your daily quota that is left
- * @property {Object} quotas.api_requests_hourly Your hourly quota
- * @property {Number} quotas.api_requests_hourly.total Your hourly quota total
- * @property {Number} quotas.api_requests_hourly.used Your hourly quota used
- * @property {Number} quotas.api_requests_hourly.remaining Your hourly quota that is left
- * @property {Object} quotas.api_requests_monthly Your monthly quota
- * @property {Number} quotas.api_requests_monthly.total Your monthly quota total
- * @property {Number} quotas.api_requests_monthly.used Your monthly quota used
- * @property {Number} quotas.api_requests_monthly.remaining Your monthly quota that is left
+ * The API settings.
+ * @constant
  */
-class Client {
+const apiSettings = {
     /**
-     * Creates a new API client.
-     * @constructor
-     * @param {String} key Your VT API key
-     * @example
-     * let client = new nvt.Client('api-key');
+     * The API host
+     * @type {String}
      */
-    constructor(key) {
-        this.key = key;
-        this._checkKey();
-        this._fetchQuota();
-    }
-    
+    host: 'www.virustotal.com',
     /**
-     * Checks if the API key is valid.
-     * @function
-     * @throws {Err} Will throw an error if the key is invalid.
-     * @returns {undefined|Boolean} true if the key is valid, undefined+Err if invalid
-     * @private
+     * The API path and version, such as "/api/v3".
+     * NO TRAILING /!
+     * @type {String}
      */
-    _checkKey() {
-        let validation = new APIRequest('GET', `/users/${this.key}`, this.key);
-        validation.send().then((d) => {
-            if (d.code === 401) {
-                if (d.data.json.error.code === 'WrongCredentialsError') {
-                    throw new Err('Invalid API key!', 'BadKeyError');
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Fetches the quota.
-     * @function
-     * @returns {undefined} undefined
-     * @private
-     */
-    _fetchQuota() {
-        let quotaChecker = new APIRequest('GET', `/users/${this.key}`, this.key);
-        quotaChecker.send().then((data) => {
-            const d = data.data.json.data;
-            const { attributes: { quotas: q } } = d;
-            this.user = {
-                type: d.type,
-                id: d.id
-            }
-            this.quotas = {
-                api_requests_daily: {
-                    total: q.api_requests_daily.allowed,
-                    used: q.api_requests_daily.used,
-                    remaining: q.api_requests_daily.allowed - q.api_requests_daily.used
-                },
-                api_requests_hourly: {
-                    total: q.api_requests_hourly.allowed,
-                    used: q.api_requests_hourly.used,
-                    remaining: q.api_requests_hourly.allowed - q.api_requests_hourly.used
-                },
-                api_requests_monthly: {
-                    total: q.api_requests_monthly.allowed,
-                    used: q.api_requests_monthly.used,
-                    remaining: q.api_requests_monthly.allowed - q.api_requests_monthly.used
-                }
-            }
-        });
-    }
-
-    /**
-     * Fetches ScanResults for a file's SHA-256, SHA-1, or MD5.
-     * @function
-     * @param {String} id The file's SHA-256, SHA-1, or MD5
-     * @returns {Promise&lt;ScanResults>} The file's scan results
-     * @example
-     * let results = client.getResults('sha1/sha256/md5');
-     */
-    async getResults(id) {
-        return new Promise(async (resolve, reject) => {
-            let req = new APIRequest('GET', '/files/' + id, this.key);
-            let res = await req.send();
-            if (res.code == 200) {
-                let data = new ScanResults(res);
-                resolve(data);
-            } else {
-                reject(res);
-            }
-        });
-    }
+    apiRoot: '/api/v3'
 }
 
-// Export
-module.exports = Client;</code></pre>
+// Export those
+module.exports.apiSettings = apiSettings;
+
+// Import / Export
+// NOTE:
+//     Remember to do "require" then "export"
+//     IN THAT ORDER! Doing it in a different
+//     order will cause errors!
+const Err = require('./Err.js');
+module.exports.Err = Err;
+const ScanResults = require('./ScanResults.js');
+module.exports.ScanResults = ScanResults;
+const URLParams = require('./URLParams.js');
+module.exports.URLParams = URLParams;
+const Response = require('./Response.js');
+module.exports.Response = Response;
+const Request = require('./Request.js');
+module.exports.Request = Request;
+const APIRequest = require('./APIRequest.js');
+module.exports.APIRequest = APIRequest;
+const Client = require('./Client.js');
+module.exports.Client = Client;</code></pre>
         </article>
     </section>
 

@@ -17,8 +17,21 @@
  */
 
 // Pre-defined vars
+/**
+ * The API settings.
+ * @constant
+ */
 const apiSettings = {
+    /**
+     * The API host
+     * @type {String}
+     */
     host: 'www.virustotal.com',
+    /**
+     * The API path and version, such as "/api/v3".
+     * NO TRAILING /!
+     * @type {String}
+     */
     apiRoot: '/api/v3'
 }
 

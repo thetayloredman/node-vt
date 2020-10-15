@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Home</title>
+    <title>Global</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -47,134 +47,116 @@
 
 <div id="main">
     
+    <h1 class="page-title">Global</h1>
+    
 
     
 
 
 
+
+<section>
+
+
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+        
+    
+    </div>
+
     
 
-
-
-
-
-
-
-
+    
 
     
 
+     
 
-    <section class="readme">
-        <article><h1>node-vt</h1>
-<p>Welcome to <strong>node-vt</strong>, a VirusTotal API client made by BadBoyHaloCat!</p>
-<h2>Note</h2>
-<p>If you are reading this from GitHub, some links will be broken. Check out the <a href="https://thetayloredman.github.io/node-vt/">docs</a>!</p>
-<h2>What is node-vt?</h2>
-<p>node-vt is a VirusTotal API client. It provides a simple exported API for your use.</p>
-<h2>What is VirusTotal?</h2>
-<p><a href="//www.virustotal.com/">VirusTotal</a> is a service for scanning files with many Antivirus engines.</p>
-<p>It provides a <strong>free</strong> API for your use.</p>
-<h2>About the VT API</h2>
-<p>The VT API has 2 different tiers:</p>
-<ul>
-<li><a href="#free">Free</a></li>
-<li><a href="#premium">Premium</a></li>
-</ul>
-<h3>Free</h3>
-<p>The free API is very limited.</p>
-<p>It only has access to a subset of features, but can stull upload files. You have a <code>4 requests / minute</code> ratelimit and a <code>1000 requests / day</code> quota.</p>
-<h3>Premium</h3>
-<p>The premium API is only obtainable if eligible, and costs a fee.</p>
-<p>This API has almost no limitations.</p>
-<h2>Getting Started</h2>
-<h3>Installing</h3>
-<p>To install, run:</p>
-<pre class="prettyprint source lang-bash"><code>npm install node-vt
-</code></pre>
-<h3>Importing</h3>
-<p>When importing <code>node-vt</code>, it's most common to use any of the following variable names:</p>
-<ul>
-<li><code>vt</code></li>
-<li><code>VT</code></li>
-<li><code>nvt</code></li>
-<li><code>nVT</code></li>
-<li><code>virusTotal</code></li>
-<li><code>VirusTotal</code></li>
-<li><strong>Destructuring</strong></li>
-</ul>
-<p>Here's how to import. (<em>We'll use VT and Destructuring as examples</em>)</p>
-<h4><code>VT</code></h4>
-<pre class="prettyprint source lang-javascript"><code>const VT = require('node-vt');
-</code></pre>
-<h4>Destructuring</h4>
-<pre class="prettyprint source lang-javascript"><code>const {
-    Client
-    // ... (any other imports you need)
-} = require('node-vt');
-</code></pre>
-<h3>Getting an API key</h3>
-<p>To get an API key, follow these steps:</p>
-<ol>
-<li>Go to <a href="https://www.virustotal.com/">https://www.virustotal.com/</a>.</li>
-<li>Sign up for an account.</li>
-<li>Click on your name in the top right corner.</li>
-<li>Select <strong>API Key</strong>.</li>
-<li>Copy the API key.</li>
-<li>You now have your API key.</li>
-</ol>
-<h3>Making a client</h3>
-<p>In order to interface with the API, we have 2 options.</p>
-<ol>
-<li>Using the <a href="Client.html"><code>Client</code></a> class</li>
-<li>Using <a href="APIRequest.html"><code>APIRequest</code></a></li>
-</ol>
-<h4>Using <code>Client</code></h4>
-<p>First, we create a Client with our API key:</p>
-<pre class="prettyprint source lang-javascript"><code>const key = 'your-api-key-here';
+    
 
-const client = new VT.Client(key);
-</code></pre>
-<p>Now we can use the Client! For more information, see <a href="Client.html"><code>Client</code></a></p>
-<h4>Using <code>APIRequest</code></h4>
-<p>This is a bit advanced, but we can use the <code>APIRequest</code> class to send direct requests to the API.</p>
-<p>Here is a demo:</p>
-<pre class="prettyprint source lang-javascript"><code>const key = 'your-api-key-here';
+    
+        <h3 class="subsection-title">Members</h3>
 
-function request(method, path, data) {
-    /**
-     * APIRequest's constructor takes 3 parameters.
-     * 
-     * 1. The method (GET/POST/etc.)
-     * 2. The path (&quot;/&quot;, &quot;/files&quot;, etc.)
-     * 3. Your API key.
-     */
-    const req = new VT.APIRequest(method, path, key);
-
-    /**
-     * To *send* this request, we use APIRequest#send.
-     */
-    if (method === 'POST') {
-        req.send(data)
-            .then(handle); // Fire the callback
-    } else {
-        req.send()
-            .then(handle); // Fire the callback
-    }
-
-    /**
-     * We need to handle the request when it's done.
-     */
-    const handle = (data) => {
-        // data is a Response with the RAW API response.
-        // We can get the data as JSON and log it.
-        console.log(data.data.json);
-    }
-}
-</code></pre></article>
-    </section>
+        
+            
+<h4 class="name" id="apiSettings"><span class="type-signature">(constant) </span>apiSettings<span class="type-signature"></span></h4>
 
 
+
+
+<div class="description">
+    <p>The API settings.</p>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line24">line 24</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
