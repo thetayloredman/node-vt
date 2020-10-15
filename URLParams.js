@@ -40,6 +40,7 @@ class URLParams {
      * @function
      * @param {*} data The data
      * @private
+     * @returns {undefined} undefined
      */
     _validateType(data) {
         let s = this._checkType(data);
@@ -60,6 +61,7 @@ class URLParams {
      * @function
      * @param {*} data The data
      * @private
+     * @returns {null|Boolean} Null if not there, true if object, false for others
      */
     _checkType(data) {
         if (!data) {
@@ -75,6 +77,7 @@ class URLParams {
      * Initializes the parser
      * @function
      * @private
+     * @returns {undefined} undefined
      */
     _init() {
         let d = this.data;
@@ -94,6 +97,7 @@ class URLParams {
      * @param {*} key The key
      * @param {*} val The value
      * @private
+     * @returns {undefined} undefined
      */
     _appendString(key, val) {
         if (this.string) {
@@ -108,6 +112,7 @@ class URLParams {
      * @function
      * @param {*} data The data to encode
      * @private
+     * @returns {String} The URLEncoded data
      */
     _urlEncode(data) {
         let out = data;
