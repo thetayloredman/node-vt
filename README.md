@@ -21,4 +21,51 @@ The VT API has 2 different tiers:
 
 ### Free
 
+The free API is very limited.
+
+It only has access to a subset of features, but can stull upload files. You have a `4 requests / minute` ratelimit and a `1000 requests / day` quota.
+
 ### Premium
+
+The premium API is only obtainable if eligible, and costs a fee.
+
+This API has almost no limitations.
+
+## Getting Started
+
+### Installing
+
+To install, run:
+
+```bash
+npm install node-vt
+```
+
+### Importing
+
+When importing `node-vt`, it's most common to use any of the following variable names:
+
+* `vt`
+* `VT`
+* `nvt`
+* `nVT`
+* `virusTotal`
+* `VirusTotal`
+* **Destructuring**
+
+Here's how to import. (*We'll use VT and Destructuring as examples*)
+
+#### `VT`
+
+```js
+const VT = require('node-vt');
+```
+
+#### Destructuring
+
+```js
+const {
+    Client
+    // ... (any other imports you need)
+} = require('node-vt');
+```

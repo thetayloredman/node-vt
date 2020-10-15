@@ -1,1 +1,0 @@
-# Getting Started with node-vt and the VirusTotal API

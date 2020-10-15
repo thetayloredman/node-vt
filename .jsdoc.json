@@ -13,7 +13,6 @@
         "encoding": "utf8",
         "destination": "docs/",
         "readme": "./README.md",
-        "tutorials": "tutorials/",
         "recurse": true,
         "verbose": true,
         "private": false,
