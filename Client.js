@@ -33,6 +33,7 @@ class Client {
     constructor(key) {
         this.key = key;
         this._checkKey();
+        this._fetchQuota();
     }
     
     /**
@@ -41,12 +42,51 @@ class Client {
      * @private
      */
     _checkKey() {
-        this.validation = new APIRequest('GET', `/users/${this.key}`, this.key);
-        this.validation.send().then((d) => {
+        let validation = new APIRequest('GET', `/users/${this.key}`, this.key);
+        validation.send().then((d) => {
             if (d.code === 401) {
                 if (d.data.json.error.code === 'WrongCredentialsError') {
                     console.log('DEBUG/ERR', Err);
                     throw new Err('Invalid API key!', 'BadKeyError');
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        });
+    }
+
+    /**
+     * Fetches the quota.
+     * @function
+     * @private
+     */
+    _fetchQuota() {
+        let quotaChecker = new APIRequest('GET', `/users/${this.key}`, this.key);
+        quotaChecker.send().then((data) => {
+            const d = data.data.json.data;
+            console.log(d)
+            const { attributes: { quotas: q } } = d;
+            this.user = {
+                type: d.type,
+                id: d.id
+            }
+            this.quotas = {
+                api_requests_daily: {
+                    total: q.api_requests_daily.allowed,
+                    used: q.api_requests_daily.used,
+                    remaining: q.api_requests_daily.allowed - q.api_requests_daily.used
+                },
+                api_requests_hourly: {
+                    total: q.api_requests_hourly.allowed,
+                    used: q.api_requests_hourly.used,
+                    remaining: q.api_requests_hourly.allowed - q.api_requests_hourly.used
+                },
+                api_requests_monthly: {
+                    total: q.api_requests_monthly.allowed,
+                    used: q.api_requests_monthly.used,
+                    remaining: q.api_requests_monthly.allowed - q.api_requests_monthly.used
                 }
             }
         });
