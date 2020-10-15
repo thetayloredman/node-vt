@@ -19,7 +19,7 @@
 // Modules
 
 // Imports
-const { APIRequest, Err } = require('./index.js')
+const { APIRequest, Err, ScanResults } = require('./index.js')
 
 // Main
 /**
@@ -87,7 +87,6 @@ class Client {
         let quotaChecker = new APIRequest('GET', `/users/${this.key}`, this.key);
         quotaChecker.send().then((data) => {
             const d = data.data.json.data;
-            console.log(d)
             const { attributes: { quotas: q } } = d;
             this.user = {
                 type: d.type,
@@ -109,6 +108,27 @@ class Client {
                     used: q.api_requests_monthly.used,
                     remaining: q.api_requests_monthly.allowed - q.api_requests_monthly.used
                 }
+            }
+        });
+    }
+
+    /**
+     * Fetches ScanResults for a file's SHA-256, SHA-1, or MD5.
+     * @function
+     * @param {String} id The file's SHA-256, SHA-1, or MD5
+     * @returns {Promise<ScanResults>} The file's scan results
+     * @example
+     * let results = client.getResults('sha1/sha256/md5');
+     */
+    async getResults(id) {
+        return new Promise(async (resolve, reject) => {
+            let req = new APIRequest('GET', '/files/' + id, this.key);
+            let res = await req.send();
+            if (res.code == 200) {
+                let data = new ScanResults(res);
+                resolve(data);
+            } else {
+                reject(res);
             }
         });
     }

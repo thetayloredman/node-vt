@@ -42,15 +42,12 @@ class ScanResults {
      * const results = new ScanResults(res.data.json); // => ScanResults
      */
     constructor(data) {
-        if (!data instanceof Response) {
-            throw new Err('ScanResults takes a Response, not a ' + typeof data, 'TypeError');
-        } else {
             if (!data.isJson) {
                 throw new Err('Failed to get a valid API Response. Is it a Response that is RESOLVED?', 'InvalidResponseError');
             } else {
                 const { data: fileData } = data.data.json;
-                this.stats = fileData.data.last_analysis_stats;
-                const results = fileData.data.attributes.last_analysis_results;
+                this.stats = fileData.attributes.last_analysis_stats;
+                const results = fileData.attributes.last_analysis_results;
 
                 // Process aliases
                 const pResults = new Object();
@@ -64,7 +61,6 @@ class ScanResults {
 
                 this.stats = pResults;
             }
-        }
     }
 }
 

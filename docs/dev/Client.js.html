@@ -42,7 +42,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html" class="filter">node-vt<br />dev mode</a></h2><div class="search-box"><input type="text" placeholder="Search..." id="search-box" /><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-list-div"><ul><li><a href='https://github.com/thetayloredman/node-vt/' class='' id='' target='_blank'>GitHub</a></li><li><a href='https://github.com/thetayloredman/node-vt/blob/main/LICENCE' class='' id='' target='_blank'>Licence</a></li><li><a href='..' class='' id='' target=''>Exit Dev Mode</a></li></ul><h3>Classes</h3><ul><li><a href="APIRequest.html">APIRequest</a><ul class='methods'><li data-type='method'><a href="APIRequest.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="APIRequest.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="APIRequest.html#send">send</a></li><li data-type='method'><a href="APIRequest.html#setHeader">setHeader</a></li></ul></li><li><a href="Client.html">Client</a><ul class='methods'><li data-type='method'><a href="Client.html#_checkKey">_checkKey</a></li><li data-type='method'><a href="Client.html#_fetchQuota">_fetchQuota</a></li></ul></li><li><a href="Err.html">Err</a></li><li><a href="Request.html">Request</a><ul class='methods'><li data-type='method'><a href="Request.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="Request.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="Request.html#send">send</a></li><li data-type='method'><a href="Request.html#setHeader">setHeader</a></li></ul></li><li><a href="Response.html">Response</a><ul class='methods'><li data-type='method'><a href="Response.html#_parseJSON">_parseJSON</a></li></ul></li><li><a href="ScanResults.html">ScanResults</a></li><li><a href="URLParams.html">URLParams</a><ul class='methods'><li data-type='method'><a href="URLParams.html#_appendString">_appendString</a></li><li data-type='method'><a href="URLParams.html#_checkType">_checkType</a></li><li data-type='method'><a href="URLParams.html#_init">_init</a></li><li data-type='method'><a href="URLParams.html#_urlEncode">_urlEncode</a></li><li data-type='method'><a href="URLParams.html#_validateType">_validateType</a></li></ul></li></ul></div>
+    <h2><a href="index.html" class="filter">node-vt<br />dev mode</a></h2><div class="search-box"><input type="text" placeholder="Search..." id="search-box" /><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-list-div"><ul><li><a href='https://github.com/thetayloredman/node-vt/' class='' id='' target='_blank'>GitHub</a></li><li><a href='https://github.com/thetayloredman/node-vt/blob/main/LICENCE' class='' id='' target='_blank'>Licence</a></li><li><a href='..' class='' id='' target=''>Exit Dev Mode</a></li></ul><h3>Classes</h3><ul><li><a href="APIRequest.html">APIRequest</a><ul class='methods'><li data-type='method'><a href="APIRequest.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="APIRequest.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="APIRequest.html#send">send</a></li><li data-type='method'><a href="APIRequest.html#setHeader">setHeader</a></li></ul></li><li><a href="Client.html">Client</a><ul class='methods'><li data-type='method'><a href="Client.html#_checkKey">_checkKey</a></li><li data-type='method'><a href="Client.html#_fetchQuota">_fetchQuota</a></li><li data-type='method'><a href="Client.html#getResults">getResults</a></li></ul></li><li><a href="Err.html">Err</a></li><li><a href="Request.html">Request</a><ul class='methods'><li data-type='method'><a href="Request.html#_cleanData">_cleanData</a></li><li data-type='method'><a href="Request.html#_validateMethod">_validateMethod</a></li><li data-type='method'><a href="Request.html#send">send</a></li><li data-type='method'><a href="Request.html#setHeader">setHeader</a></li></ul></li><li><a href="Response.html">Response</a><ul class='methods'><li data-type='method'><a href="Response.html#_parseJSON">_parseJSON</a></li></ul></li><li><a href="ScanResults.html">ScanResults</a></li><li><a href="URLParams.html">URLParams</a><ul class='methods'><li data-type='method'><a href="URLParams.html#_appendString">_appendString</a></li><li data-type='method'><a href="URLParams.html#_checkType">_checkType</a></li><li data-type='method'><a href="URLParams.html#_init">_init</a></li><li data-type='method'><a href="URLParams.html#_urlEncode">_urlEncode</a></li><li data-type='method'><a href="URLParams.html#_validateType">_validateType</a></li></ul></li></ul></div>
 </nav>
 
 <div id="main">
@@ -78,7 +78,7 @@
 // Modules
 
 // Imports
-const { APIRequest, Err } = require('./index.js')
+const { APIRequest, Err, ScanResults } = require('./index.js')
 
 // Main
 /**
@@ -146,7 +146,6 @@ class Client {
         let quotaChecker = new APIRequest('GET', `/users/${this.key}`, this.key);
         quotaChecker.send().then((data) => {
             const d = data.data.json.data;
-            console.log(d)
             const { attributes: { quotas: q } } = d;
             this.user = {
                 type: d.type,
@@ -171,6 +170,27 @@ class Client {
             }
         });
     }
+
+    /**
+     * Fetches ScanResults for a file's SHA-256, SHA-1, or MD5.
+     * @function
+     * @param {String} id The file's SHA-256, SHA-1, or MD5
+     * @returns {Promise&lt;ScanResults>} The file's scan results
+     * @example
+     * let results = client.getResults('sha1/sha256/md5');
+     */
+    async getResults(id) {
+        return new Promise(async (resolve, reject) => {
+            let req = new APIRequest('GET', '/files/' + id, this.key);
+            let res = await req.send();
+            if (res.code == 200) {
+                let data = new ScanResults(res);
+                resolve(data);
+            } else {
+                reject(res);
+            }
+        });
+    }
 }
 
 // Export
@@ -192,7 +212,7 @@ module.exports = Client;</code></pre>
 <script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 <script>
-var list = [{"title":"APIRequest","link":"<a href=\"APIRequest.html\">APIRequest</a>"},{"title":"APIRequest#_cleanData","link":"<a href=\"APIRequest.html#_cleanData\">APIRequest &rtrif; _cleanData</a>"},{"title":"APIRequest#_validateMethod","link":"<a href=\"APIRequest.html#_validateMethod\">APIRequest &rtrif; _validateMethod</a>"},{"title":"APIRequest#send","link":"<a href=\"APIRequest.html#send\">APIRequest &rtrif; send</a>"},{"title":"APIRequest#setHeader","link":"<a href=\"APIRequest.html#setHeader\">APIRequest &rtrif; setHeader</a>"},{"title":"Client","link":"<a href=\"Client.html\">Client</a>"},{"title":"Client#_checkKey","link":"<a href=\"Client.html#_checkKey\">Client &rtrif; _checkKey</a>"},{"title":"Client#_fetchQuota","link":"<a href=\"Client.html#_fetchQuota\">Client &rtrif; _fetchQuota</a>"},{"title":"Err","link":"<a href=\"Err.html\">Err</a>"},{"title":"Request","link":"<a href=\"Request.html\">Request</a>"},{"title":"Request#_cleanData","link":"<a href=\"Request.html#_cleanData\">Request &rtrif; _cleanData</a>"},{"title":"Request#_validateMethod","link":"<a href=\"Request.html#_validateMethod\">Request &rtrif; _validateMethod</a>"},{"title":"Request#send","link":"<a href=\"Request.html#send\">Request &rtrif; send</a>"},{"title":"Request#setHeader","link":"<a href=\"Request.html#setHeader\">Request &rtrif; setHeader</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"Response#_parseJSON","link":"<a href=\"Response.html#_parseJSON\">Response &rtrif; _parseJSON</a>"},{"title":"ScanResults","link":"<a href=\"ScanResults.html\">ScanResults</a>"},{"title":"URLParams","link":"<a href=\"URLParams.html\">URLParams</a>"},{"title":"URLParams#_appendString","link":"<a href=\"URLParams.html#_appendString\">URLParams &rtrif; _appendString</a>"},{"title":"URLParams#_checkType","link":"<a href=\"URLParams.html#_checkType\">URLParams &rtrif; _checkType</a>"},{"title":"URLParams#_init","link":"<a href=\"URLParams.html#_init\">URLParams &rtrif; _init</a>"},{"title":"URLParams#_urlEncode","link":"<a href=\"URLParams.html#_urlEncode\">URLParams &rtrif; _urlEncode</a>"},{"title":"URLParams#_validateType","link":"<a href=\"URLParams.html#_validateType\">URLParams &rtrif; _validateType</a>"}];
+var list = [{"title":"APIRequest","link":"<a href=\"APIRequest.html\">APIRequest</a>"},{"title":"APIRequest#_cleanData","link":"<a href=\"APIRequest.html#_cleanData\">APIRequest &rtrif; _cleanData</a>"},{"title":"APIRequest#_validateMethod","link":"<a href=\"APIRequest.html#_validateMethod\">APIRequest &rtrif; _validateMethod</a>"},{"title":"APIRequest#send","link":"<a href=\"APIRequest.html#send\">APIRequest &rtrif; send</a>"},{"title":"APIRequest#setHeader","link":"<a href=\"APIRequest.html#setHeader\">APIRequest &rtrif; setHeader</a>"},{"title":"Client","link":"<a href=\"Client.html\">Client</a>"},{"title":"Client#_checkKey","link":"<a href=\"Client.html#_checkKey\">Client &rtrif; _checkKey</a>"},{"title":"Client#_fetchQuota","link":"<a href=\"Client.html#_fetchQuota\">Client &rtrif; _fetchQuota</a>"},{"title":"Client#getResults","link":"<a href=\"Client.html#getResults\">Client &rtrif; getResults</a>"},{"title":"Err","link":"<a href=\"Err.html\">Err</a>"},{"title":"Request","link":"<a href=\"Request.html\">Request</a>"},{"title":"Request#_cleanData","link":"<a href=\"Request.html#_cleanData\">Request &rtrif; _cleanData</a>"},{"title":"Request#_validateMethod","link":"<a href=\"Request.html#_validateMethod\">Request &rtrif; _validateMethod</a>"},{"title":"Request#send","link":"<a href=\"Request.html#send\">Request &rtrif; send</a>"},{"title":"Request#setHeader","link":"<a href=\"Request.html#setHeader\">Request &rtrif; setHeader</a>"},{"title":"Response","link":"<a href=\"Response.html\">Response</a>"},{"title":"Response#_parseJSON","link":"<a href=\"Response.html#_parseJSON\">Response &rtrif; _parseJSON</a>"},{"title":"ScanResults","link":"<a href=\"ScanResults.html\">ScanResults</a>"},{"title":"URLParams","link":"<a href=\"URLParams.html\">URLParams</a>"},{"title":"URLParams#_appendString","link":"<a href=\"URLParams.html#_appendString\">URLParams &rtrif; _appendString</a>"},{"title":"URLParams#_checkType","link":"<a href=\"URLParams.html#_checkType\">URLParams &rtrif; _checkType</a>"},{"title":"URLParams#_init","link":"<a href=\"URLParams.html#_init\">URLParams &rtrif; _init</a>"},{"title":"URLParams#_urlEncode","link":"<a href=\"URLParams.html#_urlEncode\">URLParams &rtrif; _urlEncode</a>"},{"title":"URLParams#_validateType","link":"<a href=\"URLParams.html#_validateType\">URLParams &rtrif; _validateType</a>"}];
 setupSearch(list)
 </script>
 

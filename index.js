@@ -32,6 +32,8 @@ module.exports.apiSettings = apiSettings;
 //     order will cause errors!
 const Err = require('./Err.js');
 module.exports.Err = Err;
+const ScanResults = require('./ScanResults.js');
+module.exports.ScanResults = ScanResults;
 const URLParams = require('./URLParams.js');
 module.exports.URLParams = URLParams;
 const Response = require('./Response.js');
@@ -42,5 +44,3 @@ const APIRequest = require('./APIRequest.js');
 module.exports.APIRequest = APIRequest;
 const Client = require('./Client.js');
 module.exports.Client = Client;
-const ScanResults = require('./ScanResults.js');
-module.exports.ScanResults = ScanResults;
