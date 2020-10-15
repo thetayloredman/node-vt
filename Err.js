@@ -28,7 +28,6 @@ class Err extends Error {
      * @constructor
      * @param {String} message The error message
      * @param {String} [type] The type of error (Like "TypeError")
-     * @returns {undefined} undefined
      * @example
      * throw new Err('Example', 'ExampleError'); // => [NodeVTError]: ExampleError: Example
      */

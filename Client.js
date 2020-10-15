@@ -39,6 +39,8 @@ class Client {
     /**
      * Checks if the API key is valid.
      * @function
+     * @throws {Err} Will throw an error if the key is invalid.
+     * @returns {undefined|Boolean} true if the key is valid, undefined+Err if invalid
      * @private
      */
     _checkKey() {
@@ -59,6 +61,7 @@ class Client {
     /**
      * Fetches the quota.
      * @function
+     * @returns {undefined} undefined
      * @private
      */
     _fetchQuota() {

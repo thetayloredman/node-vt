@@ -39,8 +39,9 @@ class URLParams {
      * Validates the type of data
      * @function
      * @param {*} data The data
-     * @private
+     * @throws {Err} Throws an error if there was a bad type or count. (ArgumentCountError or TypeError)
      * @returns {undefined} undefined
+     * @private
      */
     _validateType(data) {
         let s = this._checkType(data);
