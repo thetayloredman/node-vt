@@ -34,11 +34,18 @@ class Client {
         this.key = key;
         this._checkKey();
     }
+    
+    /**
+     * Checks if the API key is valid.
+     * @function
+     * @private
+     */
     _checkKey() {
         this.validation = new APIRequest('GET', `/users/${this.key}`, this.key);
         this.validation.send().then((d) => {
             if (d.code === 401) {
-                if (d.data.error.code === 'WrongCredentialsError') {
+                if (d.data.json.error.code === 'WrongCredentialsError') {
+                    console.log('DEBUG/ERR', Err);
                     throw new Err('Invalid API key!', 'BadKeyError');
                 }
             }
