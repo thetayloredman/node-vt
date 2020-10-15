@@ -21,8 +21,13 @@
             "title": "node-vt",
             "menu": [
                 {
-                    "title": "Developer's Site",
-                    "link": "https://badboyhalocat.tk/",
+                    "title": "GitHub",
+                    "link": "https://github.com/thetayloredman/node-vt/",
+                    "target": "_blank"
+                },
+                {
+                    "title": "Licence",
+                    "link": "https://github.com/thetayloredman/node-vt/blob/LICENCE",
                     "target": "_blank"
                 }
             ],
