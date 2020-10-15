@@ -57,15 +57,26 @@ Here's how to import. (*We'll use VT and Destructuring as examples*)
 
 #### `VT`
 
-```js
+```javascript
 const VT = require('node-vt');
 ```
 
 #### Destructuring
 
-```js
+```javascript
 const {
     Client
     // ... (any other imports you need)
 } = require('node-vt');
 ```
+
+### Getting an API key
+
+To get an API key, follow these steps:
+
+1. Go to [https://www.virustotal.com/](https://www.virustotal.com/)
+2. Sign up for an account
+3. Click on your name in the top right corner:
+   ![Where to find the button](https://media.discordapp.net/attachments/731940839458340915/766376135998570596/Screen_Shot_2020-10-15_at_12.04.51_PM.png)
+4. Select **![Key](https://raw.github.com/thetayloredman/node-vt/main/icons/key.svg) API Key**.
+5. Copy the API key.
