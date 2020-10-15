@@ -11,14 +11,14 @@
  
     "opts": {
         "encoding": "utf8",
-        "destination": "docs/",
+        "destination": "docs/dev/",
         "readme": "./README.md",
         "recurse": true,
         "verbose": true,
-        "private": false,
+        "private": true,
         "template": "./node_modules/clean-jsdoc-theme",
         "theme_opts": {
-            "title": "node-vt",
+            "title": "node-vt<br />dev mode",
             "menu": [
                 {
                     "title": "GitHub",
@@ -31,8 +31,8 @@
                     "target": "_blank"
                 },
                 {
-                    "title": "Developer Mode",
-                    "link": "dev"
+                    "title": "Exit Dev Mode",
+                    "link": ".."
                 }
             ],
             "footer": "Copyright (C)   2020 Logan Devine<br /><b><a href=\"https://github.com/thetayloredman/node-vt/blob/main/LICENCE\" target=\"_blank\">Licence</a></b>"
