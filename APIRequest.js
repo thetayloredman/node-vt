@@ -23,6 +23,14 @@ const { apiSettings, Request } = require('./index.js');
 
 // Main
 class APIRequest extends Request {
+    /**
+     * Sends a request to the API directly.
+     * @constructor
+     * @extends Request
+     * @param {String} method The method to use
+     * @param {String} path The API path
+     * @param {String} apiKey Your API key
+     */
     constructor(method, path, apiKey) {
         super(method, apiSettings.host, apiSettings.apiRoot + path);
         super.setHeader('x-apikey', apiKey);

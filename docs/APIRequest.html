@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Request</title>
+    <title>JSDoc: Class: APIRequest</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Request</h1>
+    <h1 class="page-title">Class: APIRequest</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Request<span class="signature">(method, host, path<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>APIRequest<span class="signature">(method, path, apiKey)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Request"><span class="type-signature"></span>new Request<span class="signature">(method, host, path<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="APIRequest"><span class="type-signature"></span>new APIRequest<span class="signature">(method, path, apiKey)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Creates a new Request
+    Sends a request to the API directly.
 </div>
 
 
@@ -73,11 +73,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -102,57 +98,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last">The request method to use</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>host</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">The host to get from</td>
+            <td class="description last">The method to use</td>
         </tr>
 
     
@@ -172,26 +121,33 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
 
-                
+            
 
+            <td class="description last">The API path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiKey</code></td>
+            
+
+            <td class="type">
+            
                 
-                </td>
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
             
 
             
-                <td class="default">
-                
-                    "/"
-                
-                </td>
-            
 
-            <td class="description last">The path to get. Must start with /!</td>
+            <td class="description last">Your API key</td>
         </tr>
 
     
@@ -232,7 +188,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Request.js.html">Request.js</a>, <a href="Request.js.html#line36">line 36</a>
+        <a href="APIRequest.js.html">APIRequest.js</a>, <a href="APIRequest.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -261,14 +217,20 @@
 
 
 
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let req = new Request('GET', 'example.com', '/'); // => Request</code></pre>
-
-
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Request.html">Request</a></li>
+    </ul>
+
 
     
 
@@ -383,6 +345,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Request.html#send">Request#send</a>
+    </li></ul></dd>
     
 
     
@@ -561,6 +528,11 @@
 
     
 
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Request.html#setHeader">Request#setHeader</a>
+    </li></ul></dd>
     
 
     

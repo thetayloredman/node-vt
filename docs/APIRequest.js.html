@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Err.js</title>
+    <title>JSDoc: Source: APIRequest.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Err.js</h1>
+    <h1 class="page-title">Source: APIRequest.js</h1>
 
     
 
@@ -47,27 +47,26 @@
 // Modules
 
 // Imports
-const {  } = require('./index.js');
+const { apiSettings, Request } = require('./index.js');
 
 // Main
-class Err extends Error {
+class APIRequest extends Request {
     /**
-     * Creates a new custom error (With message)
+     * Sends a request to the API directly.
      * @constructor
-     * @param {String} message The error message
-     * @param {String} [type] The type of error (Like "TypeError")
-     * @returns {undefined} undefined
-     * @example
-     * throw new Err('Example', 'ExampleError'); // => [NodeVTError]: ExampleError: Example
+     * @extends Request
+     * @param {String} method The method to use
+     * @param {String} path The API path
+     * @param {String} apiKey Your API key
      */
-    constructor(message, type) {
-        super(`${type ? type + ': ' : ''}${message}`);
-        this.name = '[NodeVTError]'
+    constructor(method, path, apiKey) {
+        super(method, apiSettings.host, apiSettings.apiRoot + path);
+        super.setHeader('x-apikey', apiKey);
     }
 }
 
 // Export
-module.exports = Err;</code></pre>
+module.exports = APIRequest;</code></pre>
         </article>
     </section>
 

@@ -30,7 +30,7 @@ class Err extends Error {
      * @param {String} [type] The type of error (Like "TypeError")
      * @returns {undefined} undefined
      * @example
-     * throw new Err('Example', 'ExampleError'); // => Uncaught Err [Error]: [NodeVTError] ExampleError: Example
+     * throw new Err('Example', 'ExampleError'); // => [NodeVTError]: ExampleError: Example
      */
     constructor(message, type) {
         super(`${type ? type + ': ' : ''}${message}`);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Client</title>
+    <title>JSDoc: Class: URLParams</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Client</h1>
+    <h1 class="page-title">Class: URLParams</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Client<span class="signature">(key)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>URLParams<span class="signature">(data)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Client"><span class="type-signature"></span>new Client<span class="signature">(key)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="URLParams"><span class="type-signature"></span>new URLParams<span class="signature">(data)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    Creates a new API client.
+    Creates a new set of URLEncoded parameters.
 </div>
 
 
@@ -85,13 +85,13 @@
 
         <tr>
             
-                <td class="name"><code>key</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">*</span>
 
 
             
@@ -101,7 +101,7 @@
 
             
 
-            <td class="description last">Your VT API key</td>
+            <td class="description last">The data to use</td>
         </tr>
 
     
@@ -142,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Client.js.html">Client.js</a>, <a href="Client.js.html#line33">line 33</a>
+        <a href="URLParams.js.html">URLParams.js</a>, <a href="URLParams.js.html#line31">line 31</a>
     </li></ul></dd>
     
 
@@ -169,11 +169,6 @@
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>let client = new nvt.Client('api-key');</code></pre>
 
 
 
