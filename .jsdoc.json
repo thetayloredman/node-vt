@@ -16,6 +16,17 @@
         "recurse": true,
         "verbose": true,
         "private": true,
-        "template": "./node_modules/clean-jsdoc-theme"
+        "template": "./node_modules/clean-jsdoc-theme",
+        "theme_opts": {
+            "title": "node-vt",
+            "menu": [
+                {
+                    "title": "Developer's Site",
+                    "link": "https://badboyhalocat.tk/",
+                    "target": "_blank"
+                }
+            ],
+            "footer": "<b>Copyright (C)  2020 Logan Devine</b> <i>See the licence for details.</i>"
+        }
     }
 }
