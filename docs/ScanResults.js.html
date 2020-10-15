@@ -114,10 +114,10 @@ class ScanResults {
                 // Process aliases
                 const pResults = new Object();
                 for (let [ k, v ] of Object.entries(results)) {
-                    if (!k === 'type-unsupported') {
-                        pResults[k] = v;
-                    } else {
+                    if (k === 'type-unsupported') {
                         pResults.unsupported = v;
+                    } else {
+                        pResults[k] = v;
                     }
                 }
 
